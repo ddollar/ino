@@ -149,7 +149,6 @@ class Upload(Command):
             ])
             upload_pattern = platform_settings['sam']['tools']['bossac']['upload']['pattern']
             upload_pattern = upload_pattern.replace('{build.path}/{build.project_name}.bin', '{hex_file}')
-            print " ".join(shlex.split(upload_pattern.format(**upload_args)))
             subprocess.call(shlex.split(upload_pattern.format(**upload_args)))
             #tools.bossac.upload.pattern="{path}/{cmd}" {upload.verbose} 
             # --port={serial.port.file} -U {upload.native_usb} -e -w -v -b "{build.path}/{build.project_name}.bin" -R

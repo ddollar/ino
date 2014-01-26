@@ -127,6 +127,9 @@ class Build(Command):
         self.e.find_arduino_dir('arduino_libraries_dir', ['libraries'],
                                 human_name='Arduino standard libraries')
 
+        self.e.find_arduino_dir('arduino_hardware_libraries_dir', ['hardware', 'arduino', board['arch'], 'libraries'],
+                                human_name='Arduino harware libraries')
+
         if board['arch'] in ['sam']:
             self.e.find_arduino_dir('arduino_system_dir', ['hardware', 'arduino', board['arch'], 'system'],
                                     human_name='Arduino system libraries')
@@ -382,6 +385,7 @@ class Build(Command):
         lib_dirs = [self.e.arduino_core_dir]
         lib_dirs += list_subdirs(self.e.lib_dir) 
         lib_dirs += list_subdirs(self.e.arduino_libraries_dir)
+        lib_dirs += list_subdirs(self.e.arduino_hardware_libraries_dir)
         lib_dirs += [os.path.join(self.e.arduino_variants_dir, board['build']['variant'])]
 
         inc_flags = self.recursive_inc_lib_flags(lib_dirs, board_arch)
